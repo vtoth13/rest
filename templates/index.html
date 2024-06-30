@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center">
+                    <h1 class="font-weight-bold">Restaurant Booking System</h1>
+                    <p class="lead">Book your table now and enjoy a great dining experience!</p>
+                    <a href="{% url 'table_list' %}" class="btn btn-primary">View Tables</a>
+                    <a href="{% url 'menu_list' %}" class="btn btn-secondary">View Menu</a>
+                    {% if not request.user.is_authenticated %}
+                        <a href="{% url 'signup' %}" class="btn btn-success">Sign up</a>
+                        <a href="{% url 'login_view' %}" class="btn btn-info">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <i class="fas fa-utensils fa-4x"></i>
+                    <h3>Book a Table</h3>
+                    <p>Choose from our available tables and book your spot.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-list fa-4x"></i>
+                    <h3>View Menu</h3>
+                    <p>Browse our menu and plan your meal.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-clock fa-4x"></i>
+                    <h3>Manage Bookings</h3>
+                    <p>View and manage your bookings online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Ready to Book?</h2>
+                    <a href="{% url 'booking_create' %}" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
