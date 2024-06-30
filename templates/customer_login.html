@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .form-inner {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-inner label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.form-inner input[type="text"],.form-inner input[type="password"] {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.form-inner input[type="submit"] {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #337ab7;
+    color: #fff;
+    cursor: pointer;
+}
+
+.form-inner input[type="submit"]:hover {
+    background-color: #23527c;
+}
+</style>
+    <div class="container mt-5">
+        <h1 class="display-4 text-center">Login</h1>
+        <p class="text-center">Welcome back! Please enter your credentials to access your account.</p>
+        <form method="post" class="form-group">
+            {% csrf_token %}
+            <div class="form-inner">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+            <p class="text-muted text-center">Don't have an account? <a href="{% url 'signup' %}" class="text-primary">Signup now</a></p>
+        </form>
+    </div>
+{% endblock %}
