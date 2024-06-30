@@ -15,7 +15,7 @@
     margin-bottom: 10px;
 }
 
-.form-inner input[type="text"],.form-inner input[type="email"],.form-inner input[type="password"] {
+.form-inner input[type="text"],.form-inner input[type="password"] {
     width: 100%;
     height: 40px;
     margin-bottom: 20px;
@@ -40,15 +40,15 @@
 }
 </style>
     <div class="container mt-5">
-        <h1 class="display-4 text-center">Sign up</h1>
-        <p class="text-center">Create an account to access exclusive features and benefits.</p>
+        <h1 class="display-4 text-center">Login</h1>
+        <p class="text-center">Welcome back! Please enter your credentials to access your account.</p>
         <form method="post" class="form-group">
             {% csrf_token %}
             <div class="form-inner">
                 {{ form.as_p }}
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Sign up</button>
-            <p class="text-muted text-center">Already have an account? <a href="{% url 'login_view' %}" class="text-primary">Login now</a></p>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+            <p class="text-muted text-center">Don't have an account? <a href="{% url 'signup' %}" class="text-primary">Signup now</a></p>
         </form>
     </div>
 {% endblock %}

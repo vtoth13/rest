@@ -25,6 +25,7 @@ class Booking(models.Model):
     booking_time = models.DateTimeField()
     number_of_people = models.IntegerField()
     special_requests = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Booking by {self.user.username} for {self.number_of_people} people at {self.booking_time}"

@@ -47,14 +47,20 @@
                 object-fit: cover;
             }
     </style>
+    {% if request.user.is_superuser %}
+    <meta http-equiv="refresh" content="0; url=/admin">
+    {% elif request.user.is_staff %}
+    <meta http-equiv="refresh" content="0; url=/admin">
+    {% endif %}
 </head>
 <body>
     <header class="nav-bar">
         <nav>
             <ul>
-                {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'table_list' %}">Tables</a></li>
-                    <li><a href="{% url 'menu_list' %}">Menu</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'table_list' %}">Tables</a></li>
+                <li><a href="{% url 'menu_list' %}">Menu</a></li>
+                {% if request.user.is_authenticated %}    
                     <li><a href="{% url 'booking_create' %}">Create Booking</a></li>
                     <li><a href="{% url 'booking_list' %}">My Bookings</a></li>
                     <li><a href="{% url 'logout_view' %}">Logout</a></li>
