@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+><style>
+    .form-group {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group button[type="submit"] {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 10px;
+    background-color: #337ab7;
+    color: #fff;
+    cursor: pointer;
+}
+
+.form-group button[type="submit"]:hover {
+    background-color: #23527c;
+}
+
+.form-group p.text-muted {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+</style>
+    <div class="container mt-5">
+        <h1 class="display-4 text-center">Login</h1>
+        <p class="text-center">Please select the type of account you want to log in to:</p>
+        <form class="form-group">
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-3">
+                    <button type="submit" formaction="{% url 'customer_login_view' %}" class="btn btn-primary btn-block btn-lg">Login as Customer</button>
+                    <p class="text-muted text-center">For customers who want to access their bookings information.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <button type="submit" formaction="/admin/" class="btn btn-primary btn-block btn-lg">Login as Staff Member/Admin</button>
+                    <p class="text-muted text-center">For staff members and administrators who want to access the admin dashboard.</p>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

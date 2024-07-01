@@ -1,0 +1,72 @@
+
+<!-- create_booking.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  
+</style>
+  <div class="masthead">
+    <h1>Create Booking</h1>
+  </div>
+  <div class="features">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary btn-block">Create Booking</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const dateTimeInput = document.getElementById('id_booking_time');
+    dateTimeInput.addEventListener('input', (e) => {
+      const dateTime = e.target.value;
+      const dateParts = dateTime.split('T')[0].split('-');
+      const timeParts = dateTime.split('T')[1].split(':');
+      const hours = parseInt(timeParts[0]);
+      const minutes = parseInt(timeParts[1]);
+
+      // Set minimum time to 10:00 AM
+      const minTime = 10 * 60;
+      // Set maximum time to 10:00 PM
+      const maxTime = 22 * 60;
+
+      const currentTime = hours * 60 + minutes;
+      if (currentTime < minTime || currentTime > maxTime) {
+        alert('Please select a time between 10:00 AM and 10:00 PM');
+        e.target.value = '';
+      }
+    });
+    const tableSelect = document.getElementById('id_table');
+    const numberOfPeopleInput = document.getElementById('id_number_of_people');
+
+    tableSelect.addEventListener('change', checkTableAvailability);
+    numberOfPeopleInput.addEventListener('input', checkTableAvailability);
+
+    function checkTableAvailability() {
+        const tableId = tableSelect.value;
+        const numberOfPeople = numberOfPeopleInput.value;
+
+        if (tableId && numberOfPeople) {
+            fetch(`/check-table-availability/${tableId}/${numberOfPeople}`)
+               .then(response => response.json())
+               .then(data => {
+                    if (data.is_available) {
+                        numberOfPeopleInput.setCustomValidity('');
+                    } else {
+                        numberOfPeopleInput.setCustomValidity('The selected table does not have enough seats for the number of people.');
+                    }
+                })
+               .catch(error => console.error(error));
+        }
+    }
+  </script>
+{% endblock %}
